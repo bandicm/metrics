@@ -22,3 +22,14 @@ vector<string> marcelb::Metrics::keys() {
     return _keys;
 }
 
+
+map<string, uint> marcelb::Metrics::get_data() {
+    return counters;
+}
+
+
+map<string, uint> marcelb::Metrics::get_data_and_clear() {
+    auto data = counters;
+    clear();
+    return counters;
+}

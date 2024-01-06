@@ -54,6 +54,17 @@ class Metrics {
     */
     vector<string> keys();
 
+    /**
+     * Metoda vraća map<string, uint> svih mjerenja
+    */
+    map<string, uint> get_data();
+
+    /**
+     * Metoda vraća map<string, uint> svih mjerenja i resetira brojače
+    */
+    map<string, uint> get_data_and_clear();
+    
+
 };
 
 
