@@ -11,28 +11,34 @@ using namespace std;
 
 namespace marcelb {
 
-    /**
-     * Klasa za mjerenje proizvoljne statistike
-    */
-
+/**
+ * A class for measuring arbitrary statistics
+*/
 class Metrics {
     mutex io;
     map<string, uint> counters;
 
     public:
 
+    /**
+     * Constructor, without predefining the name of the counter
+    */
     Metrics ();
+
+    /**
+     * Constructor, with predefined counters from the passed object
+    */
     Metrics (map<string, uint> _counters);
 
     /**
-     * Operator[] za pristup svakoj brojaču mjerenja
+     * Operator[] to access each measurement counter
     */
     uint& operator[](const string& key) {
         return counters[key];
     }
 
     /**
-     * Operator++ za inkrementalno povećanje brojača mjerenja
+     * Operator++ to increment the measurement counter incrementally
     */
     Metrics& operator++ (int n) {
         lock_guard<mutex> _io(io);
@@ -40,27 +46,30 @@ class Metrics {
         return *this;
     }
 
+    /**
+     * Method to set the counter from the passed object
+    */
     void set(map<string, uint> _counters) {
         counters = _counters;
     }
 
     /**
-     * Metoda za resetiranje brojača
+     * A method to reset the counter
     */
     void clear();
 
     /**
-     * Metoda koja vraća vektor stringova svih naziva brojača
+     * A method that returns a vector os strings of all counter names
     */
     vector<string> keys();
 
     /**
-     * Metoda vraća map<string, uint> svih mjerenja
+     * The method returns a map<string, uint> of all measurements
     */
     map<string, uint> get_data();
 
     /**
-     * Metoda vraća map<string, uint> svih mjerenja i resetira brojače
+     * The method returns a map<string, uint> of all measurements and resets the counters
     */
     map<string, uint> get_data_and_clear();
     
